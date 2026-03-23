@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>放映室 | 帧与字</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<!-- 视频播放弹窗 (默认隐藏) -->
+    <div id="videoModal" class="video-modal">
+        <div class="video-container">
+            <div class="close-modal" onclick="closeVideo()">关闭 [X]</div>
+            <!-- 这里用作视频播放的占位符 -->
+            <div id="videoPlayerBox"></div>
+        </div>
+    </div>
+
+<body>
+    <nav>
+        <div class="logo">Anchor <span>&</span> Shadow</div>
+        <div class="nav-links">
+            <a href="index.html">首 页</a>
+            <a href="search.html" class="active">放 映 室</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="写下一个意象... (如：绿裙子、旗袍、夏日、雨夜)">
+            <button class="btn" onclick="executeSearch()">找 寻</button>
+        </div>
+
+        <div id="resultsContainer" class="results-grid">
+            <div style="text-align: center; padding: 60px; color: #5a5245; font-style: italic; letter-spacing: 2px;">
+                放映机已就绪，等待您的文字落款...
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+</body>
+</html>

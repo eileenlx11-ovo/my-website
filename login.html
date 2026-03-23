@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>访客登记 | 帧与字</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Anchor <span>&</span> Shadow</div>
+        <div class="nav-links">
+            <a href="index.html">返 回</a>
+        </div>
+    </nav>
+
+    <div class="container auth-container vintage-card">
+        <h2 id="auth-title" style="color: var(--text-main); margin-bottom: 40px; font-weight: 300; letter-spacing: 4px;">私人放映室</h2>
+        <form id="auth-form">
+            <div class="form-group">
+                <label>收信人 (Name)</label>
+                <input type="text" placeholder="您的称呼..." required>
+            </div>
+            <div class="form-group">
+                <label>入场暗号 (Passcode)</label>
+                <input type="password" placeholder="输入密码..." required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px; font-size: 1rem;">落 座</button>
+        </form>
+        <p style="margin-top: 30px; font-size: 0.9rem; color: #9a9386;">
+            首次造访？ <a href="#" id="toggle-auth" style="color: var(--gold); text-decoration: none; border-bottom: 1px dashed var(--gold);">获取入场券</a>
+        </p>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
