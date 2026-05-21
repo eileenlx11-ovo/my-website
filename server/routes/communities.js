@@ -72,13 +72,7 @@ router.get('/communities/:id/posts', (req, res) => {
     return;
   }
 
-  const posts = db.prepare(`
-    SELECT p.id, p.title, p.body, p.created_at, u.id AS user_id, u.public_id, u.display_name, u.email
-    FROM community_posts p
-    JOIN users u ON u.id = p.user_id
-    WHERE p.community_id = ?
-    ORDER BY p.id DESC
-  `).all(community.id).map(mapPost);
+  const posts = getCommunityPosts(db, community.id);
   res.json({ community, posts });
 });
 
@@ -95,13 +89,7 @@ router.post('/communities/:id/posts', requireAuth, writeLimiter, validate(postSc
   db.prepare('INSERT INTO community_posts (community_id, user_id, title, body) VALUES (?, ?, ?, ?)')
     .run(community.id, req.user.id, req.body.title, req.body.body);
 
-  const posts = db.prepare(`
-    SELECT p.id, p.title, p.body, p.created_at, u.id AS user_id, u.public_id, u.display_name, u.email
-    FROM community_posts p
-    JOIN users u ON u.id = p.user_id
-    WHERE p.community_id = ?
-    ORDER BY p.id DESC
-  `).all(community.id).map(mapPost);
+  const posts = getCommunityPosts(db, community.id);
   res.status(201).json({ posts });
 });
 
@@ -118,6 +106,17 @@ function getCommunity(db, id) {
     GROUP BY c.id
   `).get(id);
   return row ? mapCommunity(row) : null;
+}
+
+function getCommunityPosts(db, communityId) {
+  return db.prepare(`
+    SELECT p.id, p.title, p.body, p.created_at, u.id AS user_id, u.public_id, u.display_name, u.email
+    FROM community_posts p
+    JOIN users u ON u.id = p.user_id
+    WHERE p.community_id = ?
+    ORDER BY p.id DESC
+    LIMIT 50
+  `).all(communityId).map(mapPost);
 }
 
 function mapCommunity(row) {

@@ -44,6 +44,48 @@ function getVideos(db, workId) {
   return db.prepare('SELECT * FROM videos WHERE work_id = ? ORDER BY id').all(workId).map(safeVideo).filter(Boolean);
 }
 
+function getKeywordsForWorks(db, workIds) {
+  if (!workIds.length) return new Map();
+  const rows = db.prepare(`
+    SELECT work_id, keyword
+    FROM work_keywords
+    WHERE work_id IN (${placeholders(workIds)})
+    ORDER BY keyword
+  `).all(...workIds);
+  return groupRows(rows, 'work_id', 'keyword');
+}
+
+function getVideosForWorks(db, workIds) {
+  if (!workIds.length) return new Map();
+  const rows = db.prepare(`
+    SELECT *
+    FROM videos
+    WHERE work_id IN (${placeholders(workIds)})
+    ORDER BY id
+  `).all(...workIds);
+  const videosByWork = new Map();
+  for (const row of rows) {
+    const video = safeVideo(row);
+    if (!video) continue;
+    if (!videosByWork.has(row.work_id)) videosByWork.set(row.work_id, []);
+    videosByWork.get(row.work_id).push(video);
+  }
+  return videosByWork;
+}
+
+function placeholders(values) {
+  return values.map(() => '?').join(', ');
+}
+
+function groupRows(rows, keyName, valueName) {
+  const grouped = new Map();
+  for (const row of rows) {
+    if (!grouped.has(row[keyName])) grouped.set(row[keyName], []);
+    grouped.get(row[keyName]).push(row[valueName]);
+  }
+  return grouped;
+}
+
 function hydrateWork(db, row) {
   const work = mapWork(row);
   if (!work) return null;
@@ -55,16 +97,24 @@ function hydrateWork(db, row) {
 function searchLocalWorks(db, query) {
   const terms = expandSearchTerms(query);
   const rows = db.prepare('SELECT * FROM works ORDER BY id DESC LIMIT 500').all();
+  const workIds = rows.map((row) => row.id);
+  const keywordsByWork = getKeywordsForWorks(db, workIds);
 
-  return rows
+  const scored = rows
     .map((row) => {
-      const work = hydrateWork(db, row);
+      const work = mapWork(row);
+      work.keywords = keywordsByWork.get(work.id) || [];
       return { work, score: scoreWork(work, terms) };
     })
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score || b.work.id - a.work.id)
-    .slice(0, 30)
-    .map((item) => item.work);
+    .slice(0, 30);
+
+  const videosByWork = getVideosForWorks(db, scored.map((item) => item.work.id));
+  return scored.map((item) => ({
+    ...item.work,
+    videos: videosByWork.get(item.work.id) || []
+  }));
 }
 
 function expandSearchTerms(query) {

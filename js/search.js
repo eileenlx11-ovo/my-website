@@ -97,15 +97,7 @@ function openVideo(video) {
   const modal = document.getElementById('videoModal');
   const box = document.getElementById('videoPlayerBox');
   selectedVideo = video;
-  box.textContent = '';
-  const iframe = document.createElement('iframe');
-  iframe.src = video.embedUrl;
-  iframe.title = video.title || '电影片段';
-  iframe.loading = 'lazy';
-  iframe.allowFullscreen = true;
-  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
-  box.append(iframe);
+  AnchorApi.renderVideoEmbed(box, video, '电影片段');
   modal.style.display = 'flex';
 }
 

@@ -52,16 +52,7 @@ function renderWork(work) {
 }
 
 function openWorkVideo(video) {
-  const box = document.getElementById('workVideoBox');
-  box.textContent = '';
-  const iframe = document.createElement('iframe');
-  iframe.src = video.embedUrl;
-  iframe.title = video.title || '视频片段';
-  iframe.allowFullscreen = true;
-  iframe.loading = 'lazy';
-  iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
-  box.append(iframe);
+  AnchorApi.renderVideoEmbed(document.getElementById('workVideoBox'), video, '视频片段');
 }
 
 function renderComments(comments) {

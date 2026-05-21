@@ -21,6 +21,7 @@ async function updateNavAuthState() {
       logout.dataset.authDynamic = 'true';
       logout.addEventListener('click', async (event) => {
         event.preventDefault();
+        AnchorApi.clearCurrentUser();
         await AnchorApi.request('/api/auth/logout', { method: 'POST' });
         window.location.href = 'index.html';
       });

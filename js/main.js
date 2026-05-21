@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     : { displayName: nameInput.value.trim(), email: emailInput.value.trim(), password: passwordInput.value };
                 const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
                 await AnchorApi.request(endpoint, { method: 'POST', body: JSON.stringify(payload) });
+                AnchorApi.clearCurrentUser();
                 window.location.href = 'search.html';
             } catch (error) {
                 notice.textContent = error.message;

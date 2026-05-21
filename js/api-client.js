@@ -1,3 +1,5 @@
+let currentUserPromise;
+
 window.AnchorApi = {
   async request(path, options = {}) {
     const response = await fetch(path, {
@@ -22,7 +24,23 @@ window.AnchorApi = {
   },
 
   async currentUser() {
-    const data = await this.request('/api/auth/me');
-    return data.user;
+    currentUserPromise ||= this.request('/api/auth/me').then((data) => data.user);
+    return currentUserPromise;
+  },
+
+  clearCurrentUser() {
+    currentUserPromise = undefined;
+  },
+
+  renderVideoEmbed(container, video, fallbackTitle = '视频片段') {
+    container.textContent = '';
+    const iframe = document.createElement('iframe');
+    iframe.src = video.embedUrl;
+    iframe.title = video.title || fallbackTitle;
+    iframe.allowFullscreen = true;
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
+    container.append(iframe);
   }
 };
