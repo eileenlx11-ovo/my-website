@@ -2,31 +2,33 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>放映室 | 帧与字</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<!-- 视频播放弹窗 (默认隐藏) -->
+<body>
     <div id="videoModal" class="video-modal">
         <div class="video-container">
             <div class="close-modal" onclick="closeVideo()">关闭 [X]</div>
-            <!-- 这里用作视频播放的占位符 -->
             <div id="videoPlayerBox"></div>
         </div>
     </div>
 
-<body>
     <nav>
         <div class="logo">Anchor <span>&</span> Shadow</div>
         <div class="nav-links">
             <a href="index.html">首 页</a>
             <a href="search.html" class="active">放 映 室</a>
+            <a href="community.html">梦 中 人</a>
+            <a href="profile.html">访 客 记 录</a>
+            <a href="login.html">访 客 登 记</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="写下一个意象... (如：绿裙子、旗袍、夏日、雨夜)">
-            <button class="btn" onclick="executeSearch()">找 寻</button>
+            <button class="btn" id="searchButton">找 寻</button>
         </div>
 
         <div id="resultsContainer" class="results-grid">
@@ -36,6 +38,8 @@
         </div>
     </div>
 
-    <script src="js/api.js"></script>
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/search.js"></script>
 </body>
 </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>好友与分享 | 帧与字</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Anchor <span>&</span> Shadow</div>
+        <div class="nav-links">
+            <a href="index.html">首 页</a>
+            <a href="search.html">放 映 室</a>
+            <a href="community.html">梦 中 人</a>
+            <a href="profile.html">访 客 记 录</a>
+            <a href="friends.html" class="active">好友与分享</a>
+        </div>
+    </nav>
+
+    <div class="container work-page">
+        <section class="vintage-card">
+            <h3>我的友人编号</h3>
+            <div id="myPublicId" class="work-subtitle"></div>
+            <form id="addFriendForm" class="stack-form">
+                <input id="friendPublicId" type="text" placeholder="输入好友 ID">
+                <button class="btn btn-primary" type="submit">发送好友请求</button>
+            </form>
+            <p id="friendNotice" class="empty-state"></p>
+        </section>
+
+        <div class="work-grid">
+            <section class="vintage-card">
+                <h3>待处理请求</h3>
+                <ul id="requestsList" class="list-box"></ul>
+            </section>
+            <section class="vintage-card">
+                <h3>好友列表</h3>
+                <ul id="friendsList" class="list-box"></ul>
+            </section>
+        </div>
+
+        <section class="vintage-card">
+            <h3>收到的分享</h3>
+            <div id="sharesList" class="comments-list"></div>
+        </section>
+    </div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/friends.js"></script>
+</body>
+</html>

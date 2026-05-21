@@ -2,78 +2,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
-    --bg-dark: #161513;        /* 放映室暗调背景 */
-    --bg-paper: #ece7d7;       /* 羊皮纸/旧书页暖色 */
-    --text-main: #dcd6c8;      /* 柔和的米色文字 */
-    --text-dark: #2c2824;      /* 深色背景上的暗字 */
-    --accent-green: #2b4c3f;   /* 赎罪-复古祖母绿 */
-    --accent-red: #8b2635;     /* 花样年华-丝绒暗红 */
-    --gold: #b39b5d;           /* 黯淡黄铜金 */
+    --bg-dark: #161513;
+    --bg-paper: #ece7d7;
+    --text-main: #dcd6c8;
+    --text-dark: #2c2824;
+    --accent-green: #2b4c3f;
+    --accent-red: #8b2635;
+    --gold: #b39b5d;
     --border-style: 1px solid rgba(179, 155, 93, 0.3);
 }
 
-* { 
-    margin: 0; padding: 0; box-sizing: border-box; 
-    /* 中文使用思源宋体，英文使用Playfair Display */
-    font-family: 'Playfair Display', 'Noto Serif SC', 'Times New Roman', serif; 
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Playfair Display', 'Noto Serif SC', 'Times New Roman', serif;
 }
 
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     min-height: 100vh;
-    /* 模拟老电影镜头的暗角效果 (Vignette) */
     background-image: radial-gradient(circle at center, #2a2723 0%, #11100e 100%);
     position: relative;
 }
 
-/* 模拟一点点胶片噪点/颗粒感 */
 body::before {
     content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
     pointer-events: none; z-index: 999;
 }
 
-/* 导航栏 - 剧院门楣风格 */
 nav {
-    display: flex; justify-content: space-between; align-items: center; 
+    display: flex; justify-content: space-between; align-items: center;
     padding: 30px 60px; border-bottom: var(--border-style);
 }
-.logo { 
-    font-size: 28px; font-weight: 600; letter-spacing: 4px; color: var(--gold); 
+.logo {
+    font-size: 28px; font-weight: 600; letter-spacing: 4px; color: var(--gold);
 }
 .logo span { color: var(--accent-red); font-style: italic; }
-.nav-links a { 
-    color: var(--text-main); text-decoration: none; margin-left: 40px; 
-    font-size: 0.95rem; letter-spacing: 2px; transition: color 0.4s ease; 
+.nav-links { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.nav-links a {
+    color: var(--text-main); text-decoration: none;
+    font-size: 0.95rem; letter-spacing: 2px; transition: color 0.4s ease;
 }
 .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 
-/* 按钮 - 复古票根/打字机风格 */
 .btn {
     padding: 12px 30px; border: 1px solid var(--gold); background: transparent;
-    color: var(--gold); cursor: pointer; transition: all 0.4s ease; 
+    color: var(--gold); cursor: pointer; transition: all 0.4s ease;
     text-decoration: none; display: inline-block; letter-spacing: 2px; font-size: 0.9rem;
 }
 .btn:hover { background: var(--gold); color: var(--bg-dark); }
 .btn-primary { background: var(--accent-red); border-color: var(--accent-red); color: var(--text-main); }
 .btn-primary:hover { background: transparent; color: var(--accent-red); }
 
-/* 布局容器 */
 .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-
-/* 首页 Hero Section */
 .hero { text-align: center; padding: 80px 20px; }
-.hero h1 { 
-    font-size: 3.5rem; color: var(--text-main); margin-bottom: 25px; 
-    font-weight: 300; letter-spacing: 6px; 
+.hero h1 {
+    font-size: 3.5rem; color: var(--text-main); margin-bottom: 25px;
+    font-weight: 300; letter-spacing: 6px;
 }
-.hero p { 
-    font-size: 1.1rem; margin-bottom: 50px; color: #9a9386; 
+.hero p {
+    font-size: 1.1rem; margin-bottom: 50px; color: #9a9386;
     letter-spacing: 1px; line-height: 1.8; font-style: italic;
 }
 
-/* 复古卡片 - 类似旧书页或相框 */
 .vintage-card {
     background: rgba(30, 28, 25, 0.7); border: var(--border-style);
     padding: 40px; text-align: center; transition: transform 0.4s;
@@ -83,29 +75,33 @@ nav {
 .vintage-card h3 { color: var(--gold); margin-bottom: 20px; font-weight: 400; letter-spacing: 2px; }
 .vintage-card p { font-size: 0.95rem; color: #9a9386; line-height: 1.8; }
 
-/* 登录/放映室登记 */
 .auth-container { max-width: 450px; margin: 60px auto; border-top: 3px solid var(--accent-red); }
 .form-group { margin-bottom: 25px; text-align: left; }
 .form-group label { display: block; margin-bottom: 10px; font-size: 0.9rem; color: var(--gold); letter-spacing: 1px; }
-.form-group input {
+.form-group input,
+.stack-form input,
+.stack-form textarea,
+.stack-form select {
     width: 100%; padding: 12px 0; background: transparent; border: none;
-    border-bottom: 1px solid #5a5245; color: var(--text-main); 
+    border-bottom: 1px solid #5a5245; color: var(--text-main);
     font-size: 1rem; outline: none; transition: 0.3s; font-family: 'Times New Roman', serif;
 }
-.form-group input:focus { border-bottom-color: var(--gold); }
+.stack-form textarea {
+    border: 1px solid #5a5245;
+    padding: 12px;
+    resize: vertical;
+}
+.form-group input:focus, .stack-form input:focus, .stack-form textarea:focus, .stack-form select:focus { border-bottom-color: var(--gold); }
 
-/* 检索页面 - 打字机输入框 */
 .search-box { display: flex; gap: 15px; margin-bottom: 50px; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
-.search-box input { 
-    flex: 1; padding: 10px; font-size: 1.2rem; background: transparent; border: none; 
+.search-box input {
+    flex: 1; padding: 10px; font-size: 1.2rem; background: transparent; border: none;
     color: var(--text-main); outline: none; font-style: italic;
 }
 .search-box input::placeholder { color: #5a5245; }
-.results-grid { display: grid; grid-template-columns: 1fr; gap: 40px; } /* 单列，像阅读一本书 */
-
-/* 结果展示 - 文学与电影的对照 */
-.result-item { 
-    display: flex; flex-direction: column; gap: 20px; 
+.results-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+.result-item {
+    display: flex; flex-direction: column; gap: 20px;
     padding: 40px; background: rgba(0,0,0,0.2); border-left: 2px solid var(--accent-green);
 }
 .tag-line { font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
@@ -115,8 +111,6 @@ nav {
 .movie-match { background: var(--accent-red); padding: 25px; margin-top: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 .movie-title { color: var(--bg-paper); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 2px; }
 .movie-desc { color: #e6dcc8; font-size: 1rem; line-height: 1.8; opacity: 0.9; }
-
-/* ====== 新增：放映室视频弹窗样式 ====== */
 .play-btn {
     display: inline-block;
     margin-top: 15px;
@@ -133,10 +127,8 @@ nav {
     background: var(--gold);
     color: var(--bg-dark);
 }
-
-/* 视频弹窗背景 (暗房效果) */
 .video-modal {
-    display: none; /* 默认隐藏 */
+    display: none;
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(10, 9, 8, 0.95);
@@ -146,18 +138,15 @@ nav {
     align-items: center;
     flex-direction: column;
 }
-
-/* 视频容器 (带复古边框) */
 .video-container {
     width: 80%;
     max-width: 900px;
+    aspect-ratio: 16 / 9;
     border: 2px solid var(--gold);
-    box-shadow: 0 0 30px rgba(179, 155, 93, 0.2);
+    box-shadow: 0 0 40px rgba(179, 155, 93, 0.3);
     position: relative;
     background: #000;
 }
-
-/* 关闭按钮 */
 .close-modal {
     position: absolute;
     top: -40px;
@@ -167,28 +156,259 @@ nav {
     cursor: pointer;
     letter-spacing: 2px;
 }
-.close-modal:hover {
-    color: var(--accent-red);
-}
-
-/* 视频容器 (带复古边框 完美16:9画幅) */
-.video-container {
-    width: 80%;
-    max-width: 900px;
-    aspect-ratio: 16 / 9; /* 强制电影比例 */
-    border: 2px solid var(--gold);
-    box-shadow: 0 0 40px rgba(179, 155, 93, 0.3);
-    position: relative;
-    background: #000;
-}
-
-#videoPlayerBox {
+.close-modal:hover { color: var(--accent-red); }
+#videoPlayerBox,
+#workVideoBox {
     width: 100%;
     height: 100%;
 }
-
-#videoPlayerBox iframe, #videoPlayerBox video {
+#videoPlayerBox iframe, #videoPlayerBox video,
+#workVideoBox iframe, #workVideoBox video {
     width: 100%;
     height: 100%;
     display: block;
+}
+
+.card-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+.detail-link {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+.empty-state {
+    text-align: center;
+    color: #9a9386;
+    font-style: italic;
+    letter-spacing: 1px;
+    min-height: 1.2em;
+}
+.provider-note {
+    padding: 12px 18px;
+    border: 1px dashed rgba(179, 155, 93, 0.4);
+    color: #bba878;
+    font-size: 0.9rem;
+}
+
+.work-page {
+    display: grid;
+    gap: 28px;
+}
+.work-title {
+    font-size: 2.6rem;
+    letter-spacing: 4px;
+    color: var(--text-main);
+}
+.work-subtitle,
+.work-description,
+.work-quote {
+    color: #9a9386;
+    line-height: 1.9;
+}
+.work-quote {
+    border-left: 3px solid var(--gold);
+    padding-left: 16px;
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+.video-actions,
+.external-source {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+.work-video-box {
+    margin-top: 20px;
+    background: #000;
+    aspect-ratio: 16 / 9;
+}
+.comments-list,
+.list-box {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+    text-align: left;
+}
+.comment-item {
+    padding: 18px;
+    border: 1px solid rgba(179, 155, 93, 0.25);
+    background: rgba(0,0,0,0.15);
+}
+.comment-author {
+    color: var(--gold);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+.muted {
+    color: #9a9386;
+}
+.stack-form {
+    display: grid;
+    gap: 14px;
+    margin-top: 14px;
+}
+.stack-form input,
+.stack-form textarea,
+.stack-form select {
+    color: var(--text-main);
+}
+.stack-form select option {
+    color: var(--text-dark);
+}
+.mini-btn {
+    margin-left: 10px;
+    padding: 4px 10px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+.share-card {
+    text-align: left;
+}
+.auth-nav-slot {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+.artifact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+.artifact-actions .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.artifact-actions .btn:disabled:hover {
+    background: transparent;
+    color: var(--gold);
+}
+.generated-card {
+    text-align: left;
+}
+.generated-card h3,
+.generated-card .empty-state {
+    text-align: center;
+}
+.generated-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+.generated-item {
+    display: grid;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid rgba(179, 155, 93, 0.25);
+    background: rgba(0,0,0,0.18);
+    text-align: center;
+}
+.generated-item img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 1px solid rgba(179, 155, 93, 0.2);
+    background: #000;
+}
+.profile-card {
+    text-align: left;
+}
+.profile-card h3 {
+    text-align: center;
+}
+.community-layout {
+    align-items: start;
+}
+.community-item {
+    text-align: left;
+}
+.community-select {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    padding: 0;
+    cursor: pointer;
+}
+.active-community {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 1px rgba(179, 155, 93, 0.2);
+}
+.film-strip {
+    overflow: hidden;
+    margin: 24px auto 36px;
+    max-width: 760px;
+    border: 1px solid rgba(179, 155, 93, 0.35);
+    background: rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+.film-strip::before,
+.film-strip::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 24px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(227, 221, 205, 0.45) 0,
+        rgba(227, 221, 205, 0.45) 8px,
+        transparent 8px,
+        transparent 16px
+    );
+    z-index: 2;
+}
+.film-strip::before { left: 0; }
+.film-strip::after { right: 0; }
+.film-track {
+    display: flex;
+    width: max-content;
+    animation: reelRoll 18s linear infinite;
+}
+.film-frame {
+    min-width: 110px;
+    padding: 18px 16px;
+    border-left: 1px solid rgba(179, 155, 93, 0.2);
+    border-right: 1px solid rgba(179, 155, 93, 0.2);
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 8px;
+    text-align: center;
+}
+@keyframes reelRoll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .film-track {
+        animation: none;
+    }
+    .vintage-card,
+    .btn,
+    .nav-links a {
+        transition: none;
+    }
+}
+
+@media (max-width: 900px) {
+    nav { padding: 24px 20px; flex-direction: column; gap: 16px; }
+    .hero h1 { font-size: 2.4rem; }
+    .work-grid { grid-template-columns: 1fr; }
+    .container { padding: 40px 16px; }
+    .search-box { flex-direction: column; }
 }

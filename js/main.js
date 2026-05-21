@@ -2,20 +2,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleAuthBtn = document.getElementById('toggle-auth');
     const authTitle = document.getElementById('auth-title');
     const authForm = document.getElementById('auth-form');
+    const submitBtn = document.getElementById('auth-submit');
+    const notice = document.getElementById('auth-notice');
+    const nameInput = document.getElementById('auth-name');
+    const emailInput = document.getElementById('auth-email');
+    const passwordInput = document.getElementById('auth-password');
     let isLogin = true;
 
     if (toggleAuthBtn) {
         toggleAuthBtn.addEventListener('click', (e) => {
             e.preventDefault();
             isLogin = !isLogin;
-            if (isLogin) {
-                authTitle.innerText = "私人放映室";
-                toggleAuthBtn.innerText = "获取入场券";
-                authForm.querySelector('button').innerText = "落 座";
-            } else {
-                authTitle.innerText = "访客名册登记";
-                toggleAuthBtn.innerText = "返回放映室";
-                authForm.querySelector('button').innerText = "签 署";
+            authTitle.innerText = isLogin ? '私人放映室' : '访客名册登记';
+            submitBtn.innerText = isLogin ? '落 座' : '签 署';
+            toggleAuthBtn.innerText = isLogin ? '获取入场券' : '返回放映室';
+            nameInput.parentElement.style.display = isLogin ? 'none' : 'block';
+        });
+    }
+
+    if (nameInput) {
+        nameInput.parentElement.style.display = 'none';
+    }
+
+    if (authForm) {
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            notice.textContent = '';
+
+            try {
+                const payload = isLogin
+                    ? { email: emailInput.value.trim(), password: passwordInput.value }
+                    : { displayName: nameInput.value.trim(), email: emailInput.value.trim(), password: passwordInput.value };
+                const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+                await AnchorApi.request(endpoint, { method: 'POST', body: JSON.stringify(payload) });
+                window.location.href = 'search.html';
+            } catch (error) {
+                notice.textContent = error.message;
             }
         });
     }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品批注 | 帧与字</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Anchor <span>&</span> Shadow</div>
+        <div class="nav-links">
+            <a href="index.html">首 页</a>
+            <a href="search.html">放 映 室</a>
+            <a href="community.html">梦 中 人</a>
+            <a href="profile.html">访 客 记 录</a>
+            <a href="friends.html">好友与分享</a>
+        </div>
+    </nav>
+
+    <div class="container work-page">
+        <h1 id="workTitle" class="work-title"></h1>
+        <div id="workSubtitle" class="work-subtitle"></div>
+        <div id="workQuote" class="work-quote"></div>
+        <p id="workDescription" class="work-description"></p>
+
+        <div class="work-grid">
+            <section class="vintage-card">
+                <h3>影像放映</h3>
+                <div id="workVideos" class="video-actions"></div>
+                <div id="workVideoBox" class="work-video-box"></div>
+                <div id="externalSource" class="external-source"></div>
+            </section>
+
+            <section class="vintage-card">
+                <h3>文学评论</h3>
+                <p id="commentNotice" class="empty-state"></p>
+                <form id="commentForm" class="stack-form">
+                    <textarea id="commentBody" placeholder="写下你的文学评论..." rows="5"></textarea>
+                    <button class="btn btn-primary" type="submit">发送批注</button>
+                </form>
+                <div id="commentsList" class="comments-list"></div>
+            </section>
+        </div>
+
+        <section class="vintage-card generated-card">
+            <h3>生成藏品</h3>
+            <p id="imageProviderNotice" class="empty-state"></p>
+            <form id="imageGenerateForm" class="stack-form">
+                <select id="imageStyle">
+                    <option value="复古胶片，暗金票根，旧纸纹理">复古胶片</option>
+                    <option value="手写纸张，柔和墨迹，文学批注感">手写纸张</option>
+                    <option value="暗房海报，高对比光影，颗粒质感">暗房海报</option>
+                    <option value="典藏票根，黄铜边框，优雅排版">典藏票根</option>
+                </select>
+                <div class="artifact-actions">
+                    <button class="btn" type="button" data-image-type="ticket">生成电影票券</button>
+                    <button class="btn" type="button" data-image-type="bookmark">生成文学书签</button>
+                    <button class="btn" type="button" data-image-type="poster">生成复古海报</button>
+                </div>
+            </form>
+            <div id="generatedImages" class="generated-grid"></div>
+        </section>
+
+        <section class="vintage-card share-card">
+            <h3>分享给好友</h3>
+            <p id="shareNotice" class="empty-state"></p>
+            <form id="shareForm" class="stack-form">
+                <input id="recipientPublicId" type="text" placeholder="好友 ID，例如 AS-8F3K2Q">
+                <textarea id="shareMessage" placeholder="给对方留一句话..." rows="3"></textarea>
+                <button class="btn" type="submit">送出分享</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/work.js"></script>
+</body>
+</html>

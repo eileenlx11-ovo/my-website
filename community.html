@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦中人 | 帧与字</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Anchor <span>&</span> Shadow</div>
+        <div class="nav-links">
+            <a href="index.html">首 页</a>
+            <a href="search.html">放 映 室</a>
+            <a href="community.html" class="active">梦 中 人</a>
+            <a href="profile.html">访 客 记 录</a>
+            <a href="friends.html">好友与分享</a>
+        </div>
+    </nav>
+
+    <div class="container work-page">
+        <section class="vintage-card">
+            <h1 class="work-title">梦中人</h1>
+            <p class="work-description">建立一个书与电影的梦境房间，和同好一起讨论剧情、人物、段落与镜头。</p>
+            <form id="communityForm" class="stack-form">
+                <input id="communityName" type="text" maxlength="40" placeholder="社区名称，例如：雨夜读书会">
+                <textarea id="communityDescription" maxlength="200" rows="3" placeholder="这个社区想讨论什么？"></textarea>
+                <button class="btn btn-primary" type="submit">建立社区</button>
+            </form>
+            <p id="communityNotice" class="empty-state"></p>
+        </section>
+
+        <div class="work-grid community-layout">
+            <section class="vintage-card">
+                <h3>社区房间</h3>
+                <div id="communitiesList" class="comments-list"></div>
+            </section>
+            <section class="vintage-card">
+                <h3 id="selectedCommunityTitle">讨论内容</h3>
+                <form id="postForm" class="stack-form">
+                    <input id="postTitle" type="text" maxlength="80" placeholder="讨论标题">
+                    <textarea id="postBody" rows="5" maxlength="1200" placeholder="写下你对剧情或书中内容的想法..."></textarea>
+                    <button class="btn" type="submit">发布讨论</button>
+                </form>
+                <div id="communityPosts" class="comments-list"></div>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/community.js"></script>
+</body>
+</html>

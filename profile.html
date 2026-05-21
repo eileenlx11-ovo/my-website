@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访客记录 | 帧与字</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Anchor <span>&</span> Shadow</div>
+        <div class="nav-links">
+            <a href="index.html">首 页</a>
+            <a href="search.html">放 映 室</a>
+            <a href="community.html">梦 中 人</a>
+            <a href="profile.html" class="active">访 客 记 录</a>
+            <a href="friends.html">好友与分享</a>
+        </div>
+    </nav>
+
+    <div class="container work-page">
+        <section class="vintage-card profile-card">
+            <h3>我的简介</h3>
+            <div id="profileIdentity" class="work-subtitle"></div>
+            <form id="profileForm" class="stack-form">
+                <input id="profileBio" type="text" maxlength="80" placeholder="一句话形容自己">
+                <input id="favoriteBookGenres" type="text" maxlength="120" placeholder="喜欢的书籍类型，例如：意识流、南美文学、侦探小说">
+                <input id="favoriteMovieGenres" type="text" maxlength="120" placeholder="喜欢的电影类型，例如：黑色电影、老港片、公路片">
+                <button class="btn btn-primary" type="submit">保存简介</button>
+            </form>
+            <p id="profileNotice" class="empty-state"></p>
+        </section>
+
+        <div class="work-grid">
+            <section class="vintage-card">
+                <h3>做过的批注</h3>
+                <div id="myComments" class="comments-list"></div>
+            </section>
+            <section class="vintage-card">
+                <h3>我的书友 / 票友</h3>
+                <ul id="profileFriends" class="list-box"></ul>
+                <a class="btn detail-link" href="friends.html">管理好友与分享</a>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

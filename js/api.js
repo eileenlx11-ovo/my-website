@@ -73,7 +73,14 @@ const mockDatabase = [
             film: "🎬 匹配影像：《布达佩斯大饭店》(The Grand Budapest Hotel, 2014)",
             description: "极度强迫症般的居中对称构图，搭配马卡龙般甜美的粉色与淡蓝色调，像一本精致却略带忧伤的立体童话书。"
         },
-        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
+        videoUrl: `<iframe 
+        src="https://player.bilibili.com/player.html?bvid=BV1bX6pB2EKx&page=1&high_quality=1&danmaku=0" 
+        scrolling="no" 
+        border="0" 
+        frameborder="no" 
+        framespacing="0" 
+        allowfullscreen="true">
+    </iframe>`
     }
 ];
 
