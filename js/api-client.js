@@ -9,7 +9,11 @@ window.AnchorApi = {
     });
 
     const text = await response.text();
-    const data = text ? JSON.parse(text) : {};
+    const contentType = response.headers.get('content-type') || '';
+    const data = text && contentType.includes('application/json') ? JSON.parse(text) : {};
+    if (!contentType.includes('application/json')) {
+      throw new Error('后端服务未连接，当前页面只能展示静态内容。');
+    }
     if (!response.ok) {
       throw new Error(data.error || '请求失败。');
     }

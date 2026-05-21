@@ -2,10 +2,17 @@ let selectedCommunityId = null;
 let currentUser = null;
 
 async function loadCommunityPage() {
-  currentUser = await AnchorApi.currentUser();
-  setupCommunityForm();
-  setupPostForm();
-  await refreshCommunities();
+  const notice = document.getElementById('communityNotice');
+  try {
+    currentUser = await AnchorApi.currentUser();
+    setupCommunityForm();
+    setupPostForm();
+    await refreshCommunities();
+  } catch (error) {
+    notice.textContent = error.message;
+    document.getElementById('communityForm').style.display = 'none';
+    document.getElementById('postForm').style.display = 'none';
+  }
 }
 
 function setupCommunityForm() {
