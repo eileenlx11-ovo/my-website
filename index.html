@@ -5,8 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>帧与字 | 电影色调文学检索</title>
     <link rel="stylesheet" href="./css/style.css">
+    <style>
+        /* 胶片效果核心样式补全 */
+        .film-container {
+            width: 100%;
+            overflow: hidden;
+            background: #121211;
+            padding: 40px 0;
+            border-top: 1px solid #2d2b27;
+            border-bottom: 1px solid #2d2b27;
+        }
+
+        .film-track {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 40px;
+            scroll-behavior: smooth;
+        }
+
+        /* 隐藏滚动条但保留滚动功能 */
+        .film-track::-webkit-scrollbar {
+            display: none;
+        }
+        .film-track {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 电影胶片外框拟物化设计 */
+        .film-item {
+            flex: 0 0 320px;
+            background: #1a1917;
+            border-left: 12px solid #000; /* 模拟胶片暗盒边缘 */
+            border-right: 12px solid #000;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        /* 胶片上下齿孔（Sprockets）效果 */
+        .film-item::before, .film-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-image: linear-gradient(to right, #000 0px, #000 8px, transparent 8px, transparent 16px);
+            background-size: 16px 10px;
+            z-index: 10;
+        }
+        .film-item::before { top: 0; border-bottom: 2px solid #000; }
+        .film-item::after { bottom: 0; border-top: 2px solid #000; }
+
+        .film-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(20%) sepia(10%); /* 赋予一层复古电影微调 */
+            transition: all 0.5s ease;
+            padding: 10px 0; /* 留出上下齿孔的空间 */
+            background: #000;
+        }
+
+        /* 悬停显影效果 */
+        .film-item:hover {
+            transform: scale(1.03) translateY(-5px);
+        }
+        .film-item:hover img {
+            filter: grayscale(0%) sepia(0%);
+        }
+
+        .film-meta {
+            padding: 15px;
+            background: #1a1917;
+            border-top: 1px solid #2d2b27;
+        }
+        .film-meta h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            color: #e5dfd3;
+            font-weight: 400;
+        }
+        .film-meta p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #8c857b;
+        }
+    </style>
 </head>
 <body>
+    <!-- 顶部导航栏 -->
     <nav>
         <div class="logo">Anchor <span>&</span> Shadow</div>
         <div class="nav-links">
@@ -18,42 +109,117 @@
         </div>
     </nav>
 
-    <div class="container hero">
+    <!-- 英雄区 (Hero Section) -->
+    <div class="container hero" style="padding-bottom: 40px;">
         <h1>在光影的缝隙中，重逢旧日字句</h1>
+        
+        <!-- 胶片齿轮饰条 -->
         <div class="film-strip" aria-hidden="true">
-            <div class="film-track">
-                <span class="film-frame">纸</span>
-                <span class="film-frame">影</span>
-                <span class="film-frame">梦</span>
-                <span class="film-frame">字</span>
-                <span class="film-frame">书</span>
-                <span class="film-frame">光</span>
-                <span class="film-frame">纸</span>
-                <span class="film-frame">影</span>
-                <span class="film-frame">梦</span>
-                <span class="film-frame">字</span>
-                <span class="film-frame">书</span>
-                <span class="film-frame">光</span>
+            <div class="film-track-top" style="display: flex; gap: 20px; overflow: hidden; white-space: nowrap; opacity: 0.3; margin: 20px 0;">
+                <span class="film-frame">纸</span><span class="film-frame">影</span><span class="film-frame">梦</span><span class="film-frame">字</span><span class="film-frame">书</span><span class="film-frame">光</span>
+                <span class="film-frame">纸</span><span class="film-frame">影</span><span class="film-frame">梦</span><span class="film-frame">字</span><span class="film-frame">书</span><span class="film-frame">光</span>
             </div>
         </div>
-        <p>如《赎罪》般盛夏光年的油画质感，或是《花样年华》里潮湿幽暗的街灯。<br>输入一个意象，为您寻找文学名著中的段落，并匹配那一帧绝美的电影胶片。</p>
-        <div style="margin-top: 50px;">
-            <a href="search.html" class="btn btn-primary">翻 开 序 章</a>
+        
+        <p style="font-size: 1.1rem; letter-spacing: 0.08em; line-height: 2;">
+            许是《赎罪》里盛夏光年的油画质感，亦或是《花样年华》中潮湿暗涌的午夜街灯。<br>
+            拨弄一枚意象的指针，此处将为你推开文学废墟的门扉，并裁切下一帧不灭的电影纯白。
+        </p>
+        <div style="margin-top: 40px;">
+            <a href="search.html" class="btn btn-primary" style="letter-spacing: 0.2em; padding: 12px 30px;">翻 开 序 章</a>
         </div>
     </div>
 
-    <div class="container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 20px;">
-        <div class="vintage-card">
-            <h3>I . 纸张的温度</h3>
-            <p>基于经典文学语料库，从毛姆的月亮到马尔克斯的细雨，提取最具画面感的文字意象。</p>
+    <!-- 诗意旁白过渡区 -->
+    <section class="poetic-banner" style="text-align: center; padding: 60px 20px; background: #161514;">
+        <div class="poetic-quote" style="font-size: 1.2rem; font-style: italic; color: #e5dfd3; margin-bottom: 10px;">“我们是在一本书的某一页上，还是在现实的某条街角相遇？”</div>
+        <div class="poetic-author" style="color: #cda869; font-size: 0.9rem;">—— 《昨日相逢》 · 留白</div>
+    </section>
+
+    <!-- 每日推荐：横向滑动胶卷区（已改造成拟物化负片胶卷） -->
+    <section class="film-container">
+        <div class="film-track" id="filmTrack">
+            <!-- 每一个 film-item 代表一帧胶片 -->
+            <div class="film-item" onclick="openRecommend('《花样年华》', '那些消逝了的岁月，隔着一块积满灰尘的玻璃，看得到，抓不着。', '电影 / 王家卫')">
+                <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="花样年华">
+                <div class="film-meta">
+                    <h3>花样年华</h3>
+                    <p>点击倾听时光的秘密 &rarr;</p>
+                </div>
+            </div>
+            
+            <div class="film-item" onclick="openRecommend('《马尔克斯：百年孤独》', '生命中曾经有过的所有灿烂，终究都需要用寂寞来偿还。', '书籍 / 加西亚·马尔克斯')">
+                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=500" alt="百年孤独">
+                <div class="film-meta">
+                    <h3>百年孤独</h3>
+                    <p>孤独是每个人的底色 &rarr;</p>
+                </div>
+            </div>
+
+            <div class="film-item" onclick="openRecommend('《大鱼海棠》', '这短短的一生，我们最终都会失去。你不妨大胆一些，爱一个人，攀一座山，追一个梦。', '电影 / 动画')">
+                <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=500" alt="大鱼海棠">
+                <div class="film-meta">
+                    <h3>大鱼海棠</h3>
+                    <p>秋去春来，海棠花开 &rarr;</p>
+                </div>
+            </div>
         </div>
-        <div class="vintage-card" style="border-top-color: var(--accent-red);">
-            <h3>II . 胶片的显影</h3>
-            <p>跨越媒介的界限，用老电影的色调、构图与光影，为单薄的文字补全视觉的余味。</p>
+    </section>
+
+    <!-- 核心功能双栏概念区 -->
+    <div class="container" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 60px; margin-bottom: 60px; padding: 0 20px;">
+        <div class="vintage-card" style="background: #1a1917; padding: 30px; border-radius: 4px; border: 1px solid #2d2b27;">
+            <h3 style="color: #cda869; font-weight: 500; margin-top: 0;">I . 纸张的温度</h3>
+            <p style="color: #b0aa9e; font-size: 0.95rem; line-height: 1.8; margin-bottom: 0;">
+                沉潜于经典文学的语料荒原。从毛姆悬于天际的月亮，到马尔克斯落定百年的细雨，我们在此打捞出那些最富视觉通感与灵魂颤动的文字意象。
+            </p>
+        </div>
+        <div class="vintage-card" style="background: #1a1917; padding: 30px; border-radius: 4px; border: 1px solid #2d2b27; border-top: 2px solid #cda869;">
+            <h3 style="color: #cda869; font-weight: 500; margin-top: 0;">II . 胶片的显影</h3>
+            <p style="color: #b0aa9e; font-size: 0.95rem; line-height: 1.8; margin-bottom: 0;">
+                跨越经纬与媒介的藩篱。借由经典影像的呼吸、黄金时代的构图以及敏感的色调美学，为单薄的铅字墨迹补全一抹欲说还休的视觉余味。
+            </p>
         </div>
     </div>
 
+    <!-- 每日推荐弹窗（模态框） -->
+    <div class="recommend-modal" id="recommendModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: #1c1b18; padding: 40px; border-radius: 6px; max-width: 500px; width: 90%; border: 1px solid #3a3834; position: relative;">
+            <span class="close-modal" onclick="closeRecommend()" style="position: absolute; top: 15px; right: 20px; color: #8c857b; font-size: 1.8rem; cursor: pointer;">&times;</span>
+            <span id="modalCategory" style="font-size: 0.85rem; color: #cda869; text-transform: uppercase; letter-spacing: 0.1em;"></span>
+            <h2 id="modalTitle" style="margin-top: 10px; font-weight: 500; color: #fff; margin-bottom: 0;"></h2>
+            <hr style="border: 0; border-top: 1px dashed #3a3834; margin: 20px 0;">
+            <p id="modalQuote" style="font-size: 1.1rem; line-height: 1.8; font-style: italic; color: #e5dfd3; letter-spacing: 0.05em;"></p>
+            <div style="margin-top: 30px; text-align: right;">
+                <button onclick="closeRecommend()" style="background: transparent; border: 1px solid #cda869; color: #cda869; padding: 6px 16px; cursor: pointer; border-radius: 4px; transition: all 0.3s;">收起信笺</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底层交互脚本 -->
     <script src="js/api-client.js"></script>
     <script src="js/auth.js"></script>
+    <script>
+        // 胶卷鼠标滚轮横向滑动优化
+        const track = document.getElementById('filmTrack');
+        track.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                track.scrollLeft += e.deltaY * 2; // 优化横向滚动效率
+            }
+        });
+
+        // 每日推荐弹窗交互控制
+        function openRecommend(title, quote, category) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalQuote').innerText = quote;
+            document.getElementById('modalCategory').innerText = category;
+            document.getElementById('recommendModal').style.display = 'flex';
+        }
+
+        function closeRecommend() {
+            document.getElementById('recommendModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
